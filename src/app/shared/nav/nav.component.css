@@ -1,0 +1,22 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+button {
+    border: gray;
+} 
+
+mat-toolbar {
+    margin-top: 1em;
+    width: 100%;
+}
+button {
+    background-color: transparent
+}
+
+.tittle {
+    margin-left: 1em;
+}
+
+.activo {
+    visibility: hidden;
+}
