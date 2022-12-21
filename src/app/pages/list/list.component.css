@@ -4,9 +4,9 @@ li {
 ul {
     padding:0;
     display: grid;
-    gap: 2em;
+    gap: 3em;
     justify-items: center !important;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
 }
 div {
     background-color: #EEEEEE;
@@ -14,7 +14,8 @@ div {
 }
 
 app-paginator {
-    position: fixed;
+    z-index: 99;
+    position: sticky;
     bottom: 0;
     width: 100%;
 }

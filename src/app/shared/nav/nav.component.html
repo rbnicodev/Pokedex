@@ -1,7 +1,7 @@
 <mat-toolbar>
-    <button routerLinkActive="activo" [routerLink]="['']" [routerLinkActiveOptions] = "{ exact: true }" class="example-icon" aria-label="Example icon-button with menu icon">
+    <button (click) = "home()" routerLinkActive="activo" [routerLink]="['']" [routerLinkActiveOptions] = "{ exact: true }" class="example-icon" aria-label="Example icon-button with menu icon">
       <mat-icon>arrow_back</mat-icon>
     </button>
-    <span class="tittle">My App</span>
+    <span class="tittle">{{ this.service.title | titlecase }}</span>
     <span class="example-spacer"></span>
 </mat-toolbar>

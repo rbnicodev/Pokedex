@@ -10,7 +10,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'pokemon:id',
+    path: 'pokemon/:id',
     component: DetailComponent
   },
   {

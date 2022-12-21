@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DataPaginator } from 'src/app/interface/data.interface';
 import { PokemonService } from 'src/app/service/pokemon.service';
 
@@ -8,21 +8,22 @@ import { PokemonService } from 'src/app/service/pokemon.service';
   styleUrls: ['./paginator.component.css']
 })
 export class PaginatorComponent {
-  @Input() data: DataPaginator = {
-    next: '',
-    previous: ''
-  }
+
+  @Input() data!: DataPaginator;
+  @Output() pageChange = new EventEmitter<string>();
 
 
-  constructor(private service: PokemonService) {
+  constructor(public service: PokemonService) {
   }
 
   next(): void {
-    this.service.getListPokemonByURL(this.data.next);
+    this.pageChange.emit( 'next' );
+    this.service.page += 1;
   }
 
   previous(): void {
-    this.service.getListPokemonByURL(this.data.previous);
+    this.pageChange.emit( 'previous' );
+    this.service.page -= 1;
   }
 
 

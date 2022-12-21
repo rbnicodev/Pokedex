@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Pokemon } from '../../interface/pokemon.interface';
 import { PokemonService } from '../../service/pokemon.service';
 
@@ -12,8 +12,11 @@ export class CardComponent {
   @Input() name: string = '';
   @Input() pokemon!: Pokemon;
 
-  constructor() {}
+  constructor( private service: PokemonService) {}
 
-  
+  verPokemon() {
+    this.service.title = this.pokemon.name;
+    console.log();
+  }
 
 }

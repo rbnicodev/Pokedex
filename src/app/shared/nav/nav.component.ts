@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { PokemonService } from 'src/app/service/pokemon.service';
 
 @Component({
   selector: 'app-nav',
@@ -8,5 +9,12 @@ import { Component } from '@angular/core';
 export class NavComponent {
 
 
-  constructor() {}
+  @Input() name: string = '';
+
+  constructor( public service: PokemonService ) {}
+
+
+  home():void {
+    this.service.title = 'Pokédex';
+  }
 }
