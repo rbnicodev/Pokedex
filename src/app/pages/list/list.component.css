@@ -1,0 +1,20 @@
+li {
+    list-style: none;
+}
+ul {
+    padding:0;
+    display: grid;
+    gap: 2em;
+    justify-items: center !important;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+}
+div {
+    background-color: #EEEEEE;
+    padding-top: 1.5em;
+}
+
+app-paginator {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

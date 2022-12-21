@@ -1,0 +1,25 @@
+.example-card {
+    max-width: 400px;
+    min-width: 95vw;
+    margin-bottom: 8px;
+  }
+
+  mat-card-title-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: top;
+  }
+  * {
+    text-align: center;
+  }
+  img {
+    height: auto;
+    width: 60vw;
+    max-width: 200px;
+}
+
+pre {
+  display: inline;
+  padding: .7em;
+}

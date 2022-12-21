@@ -1,0 +1,9 @@
+.container {
+    background-color: white;
+    display:flex;
+    flex-direction: row;
+    gap:1em;
+    justify-content: center;
+    padding-top: .5em;
+    padding-bottom: .5em;
+}
