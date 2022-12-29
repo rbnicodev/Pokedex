@@ -1,6 +1,6 @@
 <div>
     <ul>
-        <li *ngFor="let item of listPokemon"> <app-card [pokemon] = "item"></app-card></li>
+        <li *ngFor="let item of listPokemon"><app-card [pokemon]="item" (pageChange)="onPageChange($event)"></app-card></li>
     </ul>
-    <app-paginator [data]="data" (pageChange)="refresh($event)"></app-paginator>
+    <app-paginator></app-paginator>
 </div>

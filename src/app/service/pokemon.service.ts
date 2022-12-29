@@ -32,36 +32,22 @@ export class PokemonService {
   public get previous(): string {
     return this._previous;
   }
+
+
+  
   
   constructor( private http: HttpClient ) {
   }
 
-  get listPokemon(): Pokemon[] {
-    return this.getListPokemon();
+
+
+  getResults( url: string = `${ this._apiUrl }/pokemon`) :Observable<ResultSearch> {
+    return this.http.get<ResultSearch>( url );
   }
 
-   getListPokemon(): Pokemon[] {
-    const url: string = `${ this._apiUrl }/pokemon`;
-    return this.getListPokemonByURL( url );
-   }
 
-   getListPokemonByURL( url: string ): Pokemon[] {
-    let output: Pokemon[] = [];
-    this.http.get<ResultSearch>( url ).subscribe(
-      (resp) => {
-        this._next = resp.next;
-        this._previous = resp.previous;
-        for (let r of resp.results) {
-          this.http.get<Pokemon>( r.url ).subscribe(
-            (pokemon) => {
-              output.push(pokemon);
-            }
-          )
-        }
-      }
-    )
-
-    return output;
+   getListPokemonByURL( url: string ): Observable<Pokemon> {
+    return this.http.get<Pokemon>( url );
    }
 
    getPokemonByID( id: string ): Observable<Pokemon> {

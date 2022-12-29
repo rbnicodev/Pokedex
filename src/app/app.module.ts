@@ -6,6 +6,13 @@ import { MatCardModule } from '@angular/material/card'
 import {MatButtonModule} from '@angular/material/button';
 
 
+//ngrx
+import { StoreModule } from '@ngrx/store';
+import { resultsReducer, pageReducer } from './state/reducers/results.reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
+
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DetailComponent } from './pages/detail/detail.component';
@@ -22,8 +29,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { BottomNavComponent } from './shared/bottom-nav/bottom-nav.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
-import { StoreModule } from '@ngrx/store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -49,7 +54,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     HttpClientModule,
     MatCardModule,
     MatButtonModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({ results: resultsReducer, page: pageReducer }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
   ],
   providers: [

@@ -7,7 +7,7 @@
       </mat-card-title-group>
     </mat-card-header>
     <mat-card-content>
-        <p>{{ pokemon.name }} </p>
+        <p>{{ pokemon.id }} </p>
         <button (click)="verPokemon()" [routerLink] = "['/pokemon/', pokemon.id]" routerLinkActive="disabled" mat-raised-button color="primary">Ver...</button>
     </mat-card-content>
 </mat-card>

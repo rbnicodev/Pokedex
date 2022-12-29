@@ -1,56 +1,67 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Inject, Output, EventEmitter } from '@angular/core';
-import { DataPaginator } from 'src/app/interface/data.interface';
-import { Pokemon } from 'src/app/interface/pokemon.interface';
-import { ResultSearch } from 'src/app/interface/resultSearch.interface';
+import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+
+import { Observable } from 'rxjs';
+import { selectPage, selectResults } from 'src/app/state/selectors/results.selectors';
 import { PokemonService } from 'src/app/service/pokemon.service';
+import { ResultsApiActions } from 'src/app/state/actions/results.actions';
+import { Result, ResultSearch } from 'src/app/interface/resultSearch.interface';
+import { Pokemon } from 'src/app/interface/pokemon.interface';
+import { PageActions } from '../../state/actions/results.actions';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
-export class ListComponent {
+export class ListComponent implements OnInit{
 
 
-  private _listPokemon: Pokemon[] = [];
-  private _dataPaginator: DataPaginator;
+  results$ : Observable<ResultSearch> = this.store.select(selectResults);
+  listResults: Result[] = [];
+  listPokemons: Pokemon[] = [];
 
 
-  constructor( private _service: PokemonService){
-    this._listPokemon = _service.getListPokemon();
-    this._dataPaginator = {
-      next: this._service.next,
-      previous: this._service.previous
-    }
+
+  constructor( private service: PokemonService, private store: Store){
   }
 
-  refresh(arg: string): void {
-    if (arg === 'next') {
-      this.next();
-    }
-    else {
-      this.previous();
-    }
+  ngOnInit(): void {
+    this.service.getResults().subscribe(
+      results => {
+        this.store.dispatch( ResultsApiActions.loadResults( { results }));
+        this.listResults = results.results;
+        for (let result of results.results ) {
+          this.service.getListPokemonByURL( result.url ).subscribe(
+            pokemon => {
+              this.listPokemons.push( pokemon );
+            }
+          )
+        }
+      }
+    );
+  }
+
+
+  onPageChange(url: string) {
+    console.log('hola');
+    this.service.getResults( url ).subscribe(
+      results => {
+        this.store.dispatch( ResultsApiActions.loadResults( { results }));
+        this.listResults = results.results;
+        for (let result of results.results ) {
+          this.service.getListPokemonByURL( result.url ).subscribe(
+            pokemon => {
+              this.listPokemons.push( pokemon );
+            }
+          )
+        }
+      }
+    );
   }
 
   get listPokemon(): Pokemon[] {
-    return this._listPokemon;
-  }
-
-  get data(): DataPaginator {
-    return {
-      next: this._service.next,
-      previous: this._service.previous
-    }
-  }
-
-  next(): void {
-    this._listPokemon = this._service.getListPokemonByURL( this._service.next );
-  }
-
-  previous(): void {
-    this._listPokemon = this._service.getListPokemonByURL( this._service.previous );
+    return this.listPokemons.sort((a, b) => a.id - b.id);
   }
   
 }

@@ -1,6 +1,6 @@
 <div class="container">
-    <mat-icon *ngIf="data.previous; else nada" (click)="previous()">arrow_back</mat-icon>
+    <mat-icon *ngIf="page > 1; else nada" (click)="previous(previousPage)">arrow_back</mat-icon>
     <ng-template #nada><div></div></ng-template>
-    <h4>{{ this.service.page }}</h4>
-    <mat-icon *ngIf="data.next" (click)="next()">arrow_forward</mat-icon>
+    <h4>{{ page }}</h4>
+    <mat-icon (click)="next(nextPage)">arrow_forward</mat-icon>
 </div>
