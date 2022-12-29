@@ -18,7 +18,6 @@ export class ListComponent implements OnInit{
 
 
   results$ : Observable<ResultSearch> = this.store.select(selectResults);
-  listResults: Result[] = [];
   listPokemons: Pokemon[] = [];
 
 
@@ -30,7 +29,6 @@ export class ListComponent implements OnInit{
     this.service.getResults().subscribe(
       results => {
         this.store.dispatch( ResultsApiActions.loadResults( { results }));
-        this.listResults = results.results;
         for (let result of results.results ) {
           this.service.getListPokemonByURL( result.url ).subscribe(
             pokemon => {
@@ -44,11 +42,11 @@ export class ListComponent implements OnInit{
 
 
   onPageChange(url: string) {
-    console.log('hola');
+    console.log(url);
     this.service.getResults( url ).subscribe(
       results => {
+        this.listPokemons = [];
         this.store.dispatch( ResultsApiActions.loadResults( { results }));
-        this.listResults = results.results;
         for (let result of results.results ) {
           this.service.getListPokemonByURL( result.url ).subscribe(
             pokemon => {

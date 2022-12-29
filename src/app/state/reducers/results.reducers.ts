@@ -23,7 +23,7 @@ export const resultsReducer = createReducer(
 
 export const pageReducer = createReducer(
     initialPage,
-    on(PageActions.nextpage, (_state, { page }) => page++),
-    on(PageActions.previouspage, (_state, { page }) => page--)
+    on(PageActions.nextpage, (_state, { page } ) => page),
+    on(PageActions.previouspage, (_state, { page } ) => page)
 )
 

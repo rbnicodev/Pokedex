@@ -2,5 +2,5 @@
     <mat-icon *ngIf="page > 1; else nada" (click)="previous(previousPage)">arrow_back</mat-icon>
     <ng-template #nada><div></div></ng-template>
     <h4>{{ page }}</h4>
-    <mat-icon (click)="next(nextPage)">arrow_forward</mat-icon>
+    <mat-icon *ngIf="nextPage.length > 0" (click)="next()">arrow_forward</mat-icon>
 </div>
