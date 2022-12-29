@@ -1,9 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { ResultSearch } from 'src/app/interface/resultSearch.interface';
-import { Observable } from 'rxjs';
 import { PageActions, ResultsApiActions } from '../actions/results.actions';
-import { PokemonService } from '../../service/pokemon.service';
-import { state } from '@angular/animations';
 
 
 
