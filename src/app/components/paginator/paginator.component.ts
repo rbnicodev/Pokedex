@@ -1,7 +1,5 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
-import { TitleStrategy } from '@angular/router';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { DataPaginator } from 'src/app/interface/data.interface';
 import { PokemonService } from 'src/app/service/pokemon.service';
 import { PageActions } from 'src/app/state/actions/results.actions';
 import { selectPage, selectResults } from '../../state/selectors/results.selectors';
@@ -23,8 +21,8 @@ export class PaginatorComponent implements OnInit{
   ngOnInit(): void {
     this.store.select(selectResults).subscribe(
       results => {
-        this.nextPage = results.next;
-        this.previousPage = results.previous;
+        this.nextPage = results.next!;
+        this.previousPage = results.previous!;
       }
     );
     this.store.select(selectPage).subscribe(
@@ -45,19 +43,19 @@ export class PaginatorComponent implements OnInit{
         this.store.dispatch(ResultsApiActions.loadResults( { results }));
       }
     );
-    this.store.dispatch(PageActions.nextpage( { page: 1 }));
+    this.store.dispatch(PageActions.changepage( { page: 1 }));
   }
 
   next(): void {
     this.pageChange.emit(this.nextPage);
-    this.store.dispatch(PageActions.nextpage( { page: this.page+1 }  ) );
+    this.store.dispatch(PageActions.changepage( { page: this.page+1 }  ) );
     
     
   }
 
   previous(value: string): void {
     this.pageChange.emit(this.previousPage);
-    this.store.dispatch(PageActions.nextpage( { page: this.page-1 }  ) );
+    this.store.dispatch(PageActions.changepage( { page: this.page-1 }  ) );
   }
 
 

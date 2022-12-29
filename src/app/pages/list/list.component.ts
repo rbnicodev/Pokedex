@@ -1,13 +1,12 @@
-import { Component, EventEmitter, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
-import { selectPage, selectResults } from 'src/app/state/selectors/results.selectors';
+import { selectResults } from 'src/app/state/selectors/results.selectors';
 import { PokemonService } from 'src/app/service/pokemon.service';
 import { ResultsApiActions } from 'src/app/state/actions/results.actions';
-import { Result, ResultSearch } from 'src/app/interface/resultSearch.interface';
+import { ResultSearch } from 'src/app/interface/resultSearch.interface';
 import { Pokemon } from 'src/app/interface/pokemon.interface';
-import { PageActions } from '../../state/actions/results.actions';
 
 @Component({
   selector: 'app-list',
