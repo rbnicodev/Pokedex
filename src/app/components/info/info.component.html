@@ -1,1 +1,4 @@
-<p>info works!</p>
+<p>info of {{ pokemon.name | titlecase }}</p>
+<ul>
+    <li *ngFor="let item of pokemon.abilities">{{ item.ability.name }}</li>
+</ul>

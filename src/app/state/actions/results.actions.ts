@@ -1,4 +1,5 @@
 import { createActionGroup, props } from '@ngrx/store';
+import { Pokemon } from 'src/app/interface/pokemon.interface';
 import { ResultSearch } from '../../interface/resultSearch.interface';
 
 export const ResultsApiActions = createActionGroup({
@@ -14,5 +15,12 @@ export const PageActions = createActionGroup({
     events: {
         'NextPage': props<{ page: number }>(),
         'PreviousPage': props<{ page: number }>()
+    }
+})
+
+export const PokemonActions = createActionGroup({
+    source: 'Pokemon Selected',
+    events: {
+        'Set Pokemon': props<{ pokemon: Pokemon }>()
     }
 })

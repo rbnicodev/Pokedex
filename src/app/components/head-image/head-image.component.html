@@ -1,1 +1,5 @@
-<p>head-image works!</p>
+<div class="container">
+    <mat-card class="example-card">
+        <img *ngIf="pokemon.sprites?.front_default" mat-card-image [src]="pokemon.sprites?.front_default" alt="Photo of a Shiba Inu">
+    </mat-card>
+</div>

@@ -3,11 +3,11 @@
       <mat-card-title-group>
         <mat-card-title>{{ pokemon.name | titlecase }}</mat-card-title>
         <mat-card-subtitle><pre *ngFor="let item of pokemon.types">{{  item.type.name | titlecase }}</pre></mat-card-subtitle>
-        <img mat-card-xl-image [src]="pokemon.sprites.front_default" >
+        <img mat-card-xl-image [src]="pokemon.sprites?.front_default" >
       </mat-card-title-group>
     </mat-card-header>
     <mat-card-content>
-        <p>{{ pokemon.id }} </p>
+        <p>#{{ pokemon.id }} </p>
         <button (click)="verPokemon()" [routerLink] = "['/pokemon/', pokemon.id]" routerLinkActive="disabled" mat-raised-button color="primary">Ver...</button>
     </mat-card-content>
 </mat-card>

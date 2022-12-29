@@ -8,7 +8,7 @@ import {MatButtonModule} from '@angular/material/button';
 
 //ngrx
 import { StoreModule } from '@ngrx/store';
-import { resultsReducer, pageReducer } from './state/reducers/results.reducers';
+import { resultsReducer, pageReducer, pokemonReducer } from './state/reducers/results.reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 
@@ -54,7 +54,7 @@ import { PaginatorComponent } from './components/paginator/paginator.component';
     HttpClientModule,
     MatCardModule,
     MatButtonModule,
-    StoreModule.forRoot({ results: resultsReducer, page: pageReducer }),
+    StoreModule.forRoot({ results: resultsReducer, page: pageReducer, pokemon: pokemonReducer }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
   ],
   providers: [

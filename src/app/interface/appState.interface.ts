@@ -1,8 +1,9 @@
 import { ResultSearch } from "./resultSearch.interface";
-import { Observable } from 'rxjs';
+import { Pokemon } from './pokemon.interface';
 
 export interface AppState {
 
     results: ResultSearch,
+    pokemon: Pokemon,
     page: number
 }
