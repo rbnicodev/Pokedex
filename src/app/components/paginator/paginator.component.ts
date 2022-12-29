@@ -5,6 +5,7 @@ import { DataPaginator } from 'src/app/interface/data.interface';
 import { PokemonService } from 'src/app/service/pokemon.service';
 import { PageActions } from 'src/app/state/actions/results.actions';
 import { selectPage, selectResults } from '../../state/selectors/results.selectors';
+import { ResultsApiActions } from '../../state/actions/results.actions';
 
 @Component({
   selector: 'app-paginator',
@@ -36,6 +37,16 @@ export class PaginatorComponent implements OnInit{
   page: number = 1;
   nextPage = '';
   previousPage = '';
+
+
+  first(): void {
+    this.service.getResults().subscribe(
+      results => {
+        this.store.dispatch(ResultsApiActions.loadResults( { results }));
+      }
+    );
+    this.store.dispatch(PageActions.nextpage( { page: 1 }));
+  }
 
   next(): void {
     this.pageChange.emit(this.nextPage);

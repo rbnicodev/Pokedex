@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
@@ -17,7 +17,7 @@ import { PageActions } from '../../state/actions/results.actions';
 export class ListComponent implements OnInit{
 
 
-  results$ : Observable<ResultSearch> = this.store.select(selectResults);
+  results$: Observable<ResultSearch> = this.store.select(selectResults);
   listPokemons: Pokemon[] = [];
 
 
@@ -26,34 +26,26 @@ export class ListComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.service.getResults().subscribe(
+    this.results$.subscribe(
       results => {
-        this.store.dispatch( ResultsApiActions.loadResults( { results }));
-        for (let result of results.results ) {
-          this.service.getListPokemonByURL( result.url ).subscribe(
+        this.listPokemons = [];
+        for (let result of results.results) {
+          this.service.getListPokemonByURL(result.url).subscribe(
             pokemon => {
-              this.listPokemons.push( pokemon );
+              this.listPokemons.push(pokemon);
             }
           )
         }
       }
-    );
+    )
   }
 
 
   onPageChange(url: string) {
-    console.log(url);
     this.service.getResults( url ).subscribe(
       results => {
         this.listPokemons = [];
         this.store.dispatch( ResultsApiActions.loadResults( { results }));
-        for (let result of results.results ) {
-          this.service.getListPokemonByURL( result.url ).subscribe(
-            pokemon => {
-              this.listPokemons.push( pokemon );
-            }
-          )
-        }
       }
     );
   }

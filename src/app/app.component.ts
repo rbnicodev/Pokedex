@@ -14,6 +14,7 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent implements OnInit{
   title = 'Pokedex';
+
   
 
 
@@ -21,13 +22,6 @@ export class AppComponent implements OnInit{
     
   }
 
-  onNext(url: string) {
-    this.service.getResults( url ).subscribe(
-      results => {
-        this.store.dispatch( ResultsApiActions.loadPage( { results }));
-      }
-    )
-  }
 
   ngOnInit(): void {
     this.service.getResults().subscribe(

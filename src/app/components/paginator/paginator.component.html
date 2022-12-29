@@ -1,4 +1,5 @@
 <div class="container">
+    <mat-icon *ngIf="page > 2; else nada" (click)="first()">first_page</mat-icon>
     <mat-icon *ngIf="page > 1; else nada" (click)="previous(previousPage)">arrow_back</mat-icon>
     <ng-template #nada><div></div></ng-template>
     <h4>{{ page }}</h4>
